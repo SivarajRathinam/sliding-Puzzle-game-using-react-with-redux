@@ -47,7 +47,6 @@ class ImageManager extends React.Component{
 			}
 		}
 		if(this.state.isAnimating){
-			console.log(this.props)
 			return <p className="text-animate" onAnimationEnd={()=>{this.transitionEnd()}}>{this.state.total-this.state.prevtotal}</p>
 		}
 		return null;
