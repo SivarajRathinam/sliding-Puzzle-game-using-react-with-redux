@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin")
 	BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 	UglifyEsPlugin = require('uglify-es-webpack-plugin')
 
-const config = {
+let config = {
 	context:__dirname,
 	entry:'./src/index.js',
 	output:{
@@ -41,10 +41,6 @@ const config = {
 	      }
     }
 	},
-    devServer: {
-	    progress: true,
-	    historyApiFallback: true,
-	},
 	module:{
 		rules:[
 		{
@@ -71,19 +67,56 @@ const config = {
 	},
 	plugins:[
 		new HtmlWebpackPlugin({
-			template:path.resolve(__dirname,'public/index.html'),
-			filename:"index.html"
+			"template":path.resolve(__dirname,'public/index.html'),
+			"filename":"index.html"
 		}),
 		new webpack.optimize.MinChunkSizePlugin({
-			minChunkSize: 10000 // Minimum number of characters
+			"minChunkSize": 10000 // Minimum number of characters
 		}),
 		new BundleAnalyzerPlugin(),
 		new UglifyEsPlugin({
-                compress:{
-                    drop_console: true
+                "compress":{
+                    "drop_console": true
                 }
             }),
 	],
 
+}
+if (process.env.NODE_ENV !== 'production') {
+	config = {	
+		context:__dirname,
+		entry:'./src/index.js',
+		output:{
+			path:path.resolve(__dirname,'dist'),
+			filename:"[name].[chunkhash].js",
+			chunkFilename:"[name].[chunkhash].js",
+			publicPath:'/'
+		},
+		module:{
+			rules:[
+			{
+				test:/\.js?/,
+				exclude:/node_modules/,
+				loader:"babel-loader"
+			},{
+				test:/\.css?/,
+				use:["style-loader","css-loader"]
+			},{
+				test:/\.(png|j?g|svg|gif)/,
+				use:['file-loader'],
+				
+			}]
+		},
+		devServer: {
+		    progress: true,
+		    historyApiFallback: true,
+		},
+		plugins:[
+			new HtmlWebpackPlugin({
+				"template":path.resolve(__dirname,'public/index.html'),
+				"filename":"index.html"
+			})
+		]
+}
 }
 module.exports = config;

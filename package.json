@@ -6,7 +6,7 @@
   "homepage":"https://sivarajrathinam.github.io/sliding-Puzzle-game-using-react-with-redux/",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
-    "start": "webpack-dev-server --mode=developement",
+    "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production --progress=true --hot=false --profile ",
     "predeploy":"npm run build",
     "deploy":"gh-pages -d build",
