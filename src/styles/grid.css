@@ -136,3 +136,30 @@
     	height: 60px;
     }
 }
+
+@-webkit-keyframes textFadeAnimation {
+   from {transform: translateY(0px);opacity: 1}
+    to {transform: translateY(-50px);opacity: 0}
+}
+@-moz-keyframes textFadeAnimation {
+   from {transform: translateY(0px);opacity: 1}
+    to {transform: translateY(-50px);opacity: 0}
+}
+@-o-keyframes textFadeAnimation {
+   from {transform: translateY(0px);opacity: 1}
+    to {transform: translateY(-50px);opacity: 0}
+}
+@keyframes textFadeAnimation {
+   from {transform: translateY(0px);opacity: 1}
+    to {transform: translateY(-50px);opacity: 0}
+}
+
+.text-animate{
+    font-size: 1.3em;
+    text-align: center;
+    -webkit-animation: textFadeAnimation 1s 1; /* Safari 4+ */
+    -moz-animation:    textFadeAnimation 1s 1; /* Fx 5+ */
+    -o-animation:      textFadeAnimation 1s 1; /* Opera 12+ */
+    animation:         textFadeAnimation 1s 1;
+}
+

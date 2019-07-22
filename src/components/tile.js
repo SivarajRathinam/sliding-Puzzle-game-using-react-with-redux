@@ -7,16 +7,22 @@ class Tile extends React.Component{
 		super(props);
 	}
 	showHumanImage(){
-		if(this.props.tilePosition.row == this.props.human.position.row && this.props.tilePosition.col == this.props.human.position.col){
-			return <ImageManager isHuman={true}/>
+		if(this.props.tilePosition.row == this.props.human.position.row && this.props.tilePosition.col == this.props.human.position.col && this.props.tilePosition.row == this.props.fruit.position.row && this.props.tilePosition.col == this.props.fruit.position.col){
+			return <>
+					<ImageManager isHuman={true} isVisible={true}/>
+					<ImageManager isVisible={false}/>
+					</>
+		}
+		else if(this.props.tilePosition.row == this.props.human.position.row && this.props.tilePosition.col == this.props.human.position.col){
+			return <ImageManager isHuman={true} isVisible={true}/>
 		}
 		else if(this.props.tilePosition.row == this.props.fruit.position.row && this.props.tilePosition.col == this.props.fruit.position.col){
-			return <ImageManager />	
+			return <ImageManager isVisible={true}/>	
 		}
-		return null
+		return <ImageManager isVisible={false}/>
 	}
 	render(){
-		return <div className={"tile"} onClick={()=>{this.handleClick()}}>
+		return <div className={"tile"}>
 					{this.showHumanImage()}
 				</div>
 	}

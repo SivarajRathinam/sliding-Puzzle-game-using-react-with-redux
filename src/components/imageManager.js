@@ -12,25 +12,45 @@ import {updateSelectedFruit,updateFruitCollection} from '../config/actions'
 class ImageManager extends React.Component{
 	constructor(props){
 		super(props)
+		this.state = {"isAnimating":false}
 	}
+
 	componentDidMount(){
-		let fruitsCollection = [{"url":orange,"points":1},
-						{"url":apple,"points":1},
-						{"url":berry,"points":2},
-						{"url":cherry,"points":2},
-						{"url":grapes,"points":3},
-						{"url":mango,"points":5}]
-		this.props.dispatch(updateFruitCollection(fruitsCollection))
+		if(this.props.fruitsCollection.length == 0){
+			let fruitsCollection = [{"url":orange,"points":1},
+							{"url":apple,"points":1},
+							{"url":berry,"points":2},
+							{"url":cherry,"points":2},
+							{"url":grapes,"points":3},
+							{"url":mango,"points":5}]
+			this.props.dispatch(updateFruitCollection(fruitsCollection))
+		}
 	}
-	componentDidUpdate(){
+	componentDidUpdate(prevProps){
+		if (prevProps.total != this.props.total && prevProps.isVisible == true){
+			this.setState({prevtotal:prevProps.total,total:this.props.total,isAnimating:true})
+		}
 		this.updateFruit()
 	}
+	transitionEnd(){
+		this.setState({
+			isAnimating:false
+		})
+	}
 	getImage(){
-		if (this.props.isHuman)
-			return <img src={human} className="tile-image"/>;
-		if (this.props.fruit && this.props.fruit.selectedFruit)
-			return <img src={this.props.fruit.selectedFruit.url} className="tile-image"/>
-		return null
+		if((this.props.isVisible && !this.state.isAnimating) || (this.props.isHuman)){
+			if (this.props.isHuman){
+				return <img src={human} className="tile-image"/>;
+			}
+			else if(this.props.fruit && this.props.fruit.selectedFruit){
+				return <img src={this.props.fruit.selectedFruit.url} className="tile-image"/>
+			}
+		}
+		if(this.state.isAnimating){
+			console.log(this.props)
+			return <p className="text-animate" onAnimationEnd={()=>{this.transitionEnd()}}>{this.state.total-this.state.prevtotal}</p>
+		}
+		return null;
 	}
 	updateFruit(forceUpdate){
 		if ((this.props.fruit && !this.props.fruit.selectedFruit)){
@@ -46,7 +66,8 @@ function mapStateToProps(state){
 	return {
 		human:state.human,
 		fruit:state.fruit,
-		fruitsCollection:state.fruitsCollection
+		fruitsCollection:state.fruitsCollection,
+		total:state.total
 	}
 }
 export default connect(mapStateToProps)(ImageManager);
