@@ -67,16 +67,16 @@ let config = {
 	},
 	plugins:[
 		new HtmlWebpackPlugin({
-			"template":path.resolve(__dirname,'public/index.html'),
-			"filename":"index.html"
+			template:path.resolve(__dirname,'public/index.html'),
+			filename:"index.html"
 		}),
 		new webpack.optimize.MinChunkSizePlugin({
-			"minChunkSize": 10000 // Minimum number of characters
+			minChunkSize: 10000 // Minimum number of characters
 		}),
 		new BundleAnalyzerPlugin(),
 		new UglifyEsPlugin({
-                "compress":{
-                    "drop_console": true
+                compress:{
+                    drop_console: true
                 }
             }),
 	],
