@@ -80,7 +80,7 @@ const config = {
 		new BundleAnalyzerPlugin(),
 		new UglifyEsPlugin({
                 compress:{
-                    drop_console: false
+                    drop_console: true
                 }
             }),
 	],
