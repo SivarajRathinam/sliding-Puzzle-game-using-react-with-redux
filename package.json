@@ -6,9 +6,10 @@
   "homepage":"https://sivarajrathinam.github.io/sliding-Puzzle-game-using-react-with-redux/",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
+    "clean": "rimraf dist/*",
     "start": "webpack-dev-server --mode=development",
-    "build": "webpack --mode=production --progress=true --hot=false --profile ",
-    "predeploy":"npm run build",
+    "build": "npm run clean && webpack --mode=production --progress=true --hot=false --profile ",
+    "predeploy":"npm run clean && npm run build",
     "deploy":"gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
