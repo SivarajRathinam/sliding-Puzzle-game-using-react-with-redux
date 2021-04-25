@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage":"https://sivarajrathinam.github.io/sliding-Puzzle-game-using-react-with-redux/",
+  "homepage": "https://sivarajrathinam.github.io/sliding-Puzzle-game-using-react-with-redux/",
   "scripts": {
     "webpack-dev-server": "webpack-dev-server",
     "clean": "rimraf dist/*",
     "start": "webpack-dev-server --mode=development",
     "build": "npm run clean && webpack --mode=production --progress=true --hot=false --profile ",
-    "predeploy":"npm run clean && npm run build",
-    "deploy":"gh-pages -d dist",
+    "predeploy": "npm run clean && npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,7 +21,8 @@
     "pretty-ms": "^5.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
