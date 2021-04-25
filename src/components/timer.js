@@ -43,7 +43,7 @@ class Timer extends React.Component {
   }
 
   startTimer() {
-    // this.timer = setInterval(this.countDown, 1000);
+    this.timer = setInterval(this.countDown, 1000);
   }
   stopTimer() {
     clearInterval(this.timer);
